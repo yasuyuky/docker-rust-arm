@@ -9,10 +9,7 @@ RUN apt-get -y update \
                        make \
                        curl \
                        python2.7 \
-                       llvm-3.4 \
-                       clang \
-                       g++ \
-                       libssl-dev
+                       g++
 RUN mkdir /src \
 &&  cd /src \
 &&  curl -sSf https://static.rust-lang.org/dist/rustc-${RUST_VERSION}-src.tar.gz | tar xzf - \
