@@ -1,7 +1,7 @@
 FROM ubuntu:latest
 MAINTAINER yasuyuky <yasuyuki.ymd@gmail.com>
 
-ENV RUST_VERSION=1.1.0
+ENV RUST_VERSION=1.3.0
 
 RUN apt-get -y update \
 &&  apt-get -y install git \
