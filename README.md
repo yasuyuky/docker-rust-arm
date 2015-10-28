@@ -10,7 +10,7 @@ Change directory to your project root.
 Then you enter into docker image.
 
 ```
-docker run -it --rm -v${PWD}:/source yasuyuky:rust-arm
+docker run -it --rm -v ${PWD}:/source yasuyuky/rust-arm
 ```
 
 and following commands works
