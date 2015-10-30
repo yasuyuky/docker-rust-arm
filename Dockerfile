@@ -1,8 +1,6 @@
 FROM ubuntu:latest
 MAINTAINER yasuyuky <yasuyuki.ymd@gmail.com>
 
-ENV RUST_VERSION=1.3.0
-
 RUN apt-get -y update \
 &&  apt-get -y install git \
                        gcc-arm-linux-gnueabihf \
@@ -10,6 +8,7 @@ RUN apt-get -y update \
                        curl \
                        python2.7 \
                        g++
+ENV RUST_VERSION=1.4.0
 RUN mkdir /src \
 &&  cd /src \
 &&  curl -sSf https://static.rust-lang.org/dist/rustc-${RUST_VERSION}-src.tar.gz | tar xzf - \
