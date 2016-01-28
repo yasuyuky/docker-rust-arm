@@ -8,7 +8,7 @@ RUN apt-get -y update \
                        curl \
                        python2.7 \
                        g++
-ENV RUST_VERSION=1.4.0
+ENV RUST_VERSION=1.6.0
 RUN mkdir /src \
 &&  cd /src \
 &&  curl -sSf https://static.rust-lang.org/dist/rustc-${RUST_VERSION}-src.tar.gz | tar xzf - \
