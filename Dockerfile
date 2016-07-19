@@ -2,26 +2,14 @@ FROM ubuntu:latest
 MAINTAINER yasuyuky <yasuyuki.ymd@gmail.com>
 
 RUN apt-get -y update \
-&&  apt-get -y install git \
+&&  apt-get -y install \
                        gcc-arm-linux-gnueabihf \
-                       make \
                        curl \
-                       python2.7 \
                        g++
-ENV RUST_VERSION=1.6.0
-RUN mkdir /src \
-&&  cd /src \
-&&  curl -sSf https://static.rust-lang.org/dist/rustc-${RUST_VERSION}-src.tar.gz | tar xzf - \
-&&  cd rustc-${RUST_VERSION} \
-&&  ./configure --target=x86_64-unknown-linux-gnu,arm-unknown-linux-gnueabihf \
-&&  make && make install \
-&&  cd /src \
-&&  rm -rf rustc-${RUST_VERSION}
-RUN curl -sSf https://static.rust-lang.org/cargo-dist/cargo-nightly-x86_64-unknown-linux-gnu.tar.gz | tar xzf - \
-&&  cd cargo-nightly-x86_64-unknown-linux-gnu \
-&&  ./install.sh \
-&&  cd / \
-&&  rm -rf src
+RUN curl -sSf https://sh.rustup.rs > rustup.sh && chmod +x rustup.sh && ./rustup.sh -y && rm rustup.sh
+ENV PATH $PATH:/root/.cargo/bin
+RUN rustup default nightly
+RUN rustup target add arm-unknown-linux-gnueabihf
 RUN mkdir source \
 &&  mkdir .cargo \
 &&  echo "[target.arm-unknown-linux-gnueabihf]\nlinker = \"arm-linux-gnueabihf-gcc-4.8\"" > .cargo/config
