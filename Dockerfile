@@ -12,6 +12,6 @@ RUN rustup default nightly
 RUN rustup target add arm-unknown-linux-gnueabihf
 RUN mkdir source \
 &&  mkdir .cargo \
-&&  echo "[target.arm-unknown-linux-gnueabihf]\nlinker = \"arm-linux-gnueabihf-gcc-4.8\"" > .cargo/config
+&&  echo "[target.arm-unknown-linux-gnueabihf]\nlinker = \"arm-linux-gnueabihf-gcc\"" > .cargo/config
 WORKDIR source
 CMD ["bash"]
