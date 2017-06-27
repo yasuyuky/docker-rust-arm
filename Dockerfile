@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:xenial
 MAINTAINER yasuyuky <yasuyuki.ymd@gmail.com>
 
 RUN apt-get -y update \
