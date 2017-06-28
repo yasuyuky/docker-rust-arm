@@ -8,7 +8,7 @@ RUN apt-get -y update \
                        g++
 RUN curl -sSf https://sh.rustup.rs > rustup.sh && chmod +x rustup.sh && ./rustup.sh -y && rm rustup.sh
 ENV PATH $PATH:/root/.cargo/bin
-RUN rustup default nightly
+RUN rustup default stable
 RUN rustup target add arm-unknown-linux-gnueabihf
 RUN mkdir source \
 &&  mkdir .cargo \
