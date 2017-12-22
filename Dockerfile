@@ -7,9 +7,10 @@ RUN apt-get -y update \
                        curl \
                        make \
                        g++
-RUN curl -sSf https://sh.rustup.rs > rustup.sh && chmod +x rustup.sh && ./rustup.sh -y && rm rustup.sh
+ENV RUST_VERSION 1.22.1
+RUN curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain ${RUST_VERSION}
 ENV PATH $PATH:/root/.cargo/bin
-RUN rustup default stable
+RUN rustup default ${RUST_VERSION}
 RUN rustup target add arm-unknown-linux-gnueabihf
 RUN mkdir source \
 &&  mkdir .cargo \
