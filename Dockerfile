@@ -10,7 +10,6 @@ RUN apt-get -y update \
 ENV RUST_VERSION 1.22.1
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain ${RUST_VERSION}
 ENV PATH $PATH:/root/.cargo/bin
-RUN rustup default ${RUST_VERSION}
 RUN rustup target add arm-unknown-linux-gnueabihf
 RUN mkdir source \
 &&  mkdir .cargo \
