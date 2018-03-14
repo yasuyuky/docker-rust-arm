@@ -7,7 +7,7 @@ RUN apt-get -y update \
                        curl \
                        make \
                        g++
-ENV RUST_VERSION 1.23.0
+ENV RUST_VERSION 1.24.0
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y --default-toolchain ${RUST_VERSION}
 ENV PATH $PATH:/root/.cargo/bin
 RUN rustup target add arm-unknown-linux-gnueabihf
