@@ -6,7 +6,7 @@ RUN rustup target add arm-unknown-linux-gnueabihf
 RUN mkdir -p /source /.cargo /usr/local/src \
 &&  echo "[target.arm-unknown-linux-gnueabihf]\nlinker = \"arm-linux-gnueabihf-gcc\"" > /.cargo/config
 WORKDIR /usr/local/src
-ENV SSL_VER 1.0.2j
+ENV SSL_VER 1.0.2o
 ENV CC arm-linux-gnueabihf-gcc
 ENV PREFIX /usr/arm-linux-gnueabihf
 ENV PATH /usr/local/bin:$PATH
