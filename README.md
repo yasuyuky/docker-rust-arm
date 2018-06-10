@@ -21,7 +21,7 @@ cargo build --target=arm-unknown-linux-gnueabihf
 ```
 
 ```
-rustc --target=arm-unknown-linux-gnueabihf -C linker=arm-linux-gnueabihf-gcc-4.8 foo.rs
+rustc --target=arm-unknown-linux-gnueabihf -C linker=arm-linux-gnueabihf-gcc foo.rs
 ```
 
 # License
