@@ -1,4 +1,4 @@
-FROM rust:1.29.1-stretch
+FROM rust:1.29.2-stretch
 MAINTAINER yasuyuky <yasuyuki.ymd@gmail.com>
 
 RUN apt-get -y update && apt-get -y install gcc-arm-linux-gnueabihf
