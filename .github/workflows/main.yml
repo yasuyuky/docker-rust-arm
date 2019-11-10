@@ -13,7 +13,8 @@ jobs:
       run: |
         git config --local user.email "yasuyuki.ymd@gmail.com"
         git config --local user.name "Yasuyuki YAMADA"
-        git tag -f $(grep FROM Dockerfile|cut -f 2 -d ':'|cut -f 1 -d '-')
+        TAGNAME=$(grep FROM Dockerfile|cut -f 2 -d ':'|cut -f 1 -d '-')
+        git tag -f -a ${TAGNAME} -m "${TAGNAME} Tagged by CI"
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
