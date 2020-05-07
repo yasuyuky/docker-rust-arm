@@ -1,5 +1,5 @@
 FROM rust:1.43.0-stretch
-MAINTAINER yasuyuky <yasuyuki.ymd@gmail.com>
+LABEL maintainer="yasuyuky <yasuyuki.ymd@gmail.com>"
 
 RUN apt-get -y update && apt-get -y install gcc-arm-linux-gnueabihf
 RUN rustup target add arm-unknown-linux-gnueabihf
