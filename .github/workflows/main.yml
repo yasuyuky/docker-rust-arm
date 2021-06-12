@@ -21,3 +21,11 @@ jobs:
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Build and push the docker image to ghcr.io
+      run: |
+        echo $CR_PAT | docker login ghcr.io -u yasuyuky --password-stdin
+        docker build . -t ghcr.io/yasuyuky/rust-arm:latest -t ghcr.io/yasuyuky/rust-arm:$TAGNAME
+        docker push -a ghcr.io/yasuyuky/rust-arm
+      env:
+        CR_PAT: ${{ secrets.CR_PAT }}
+        TAGNAME:  ${{ steps.tagging.outputs.tag }}
