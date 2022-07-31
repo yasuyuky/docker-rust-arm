@@ -2,30 +2,44 @@ name: CI
 
 on:
   push:
-    branches: main
+    branches:
+      - main
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: rust-arm
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
-    - uses: actions/checkout@master
-    - name: Commit files
-      id: tagging
-      run: |
-        git config --local user.email "yasuyuki.ymd@gmail.com"
-        git config --local user.name "Yasuyuki YAMADA"
-        TAGNAME=$(grep FROM Dockerfile|cut -f 2 -d ':'|cut -f 1 -d '-')
-        git tag -f -a ${TAGNAME} -m "${TAGNAME} Tagged by CI"
-        echo ::set-output name=tag::${TAGNAME}
-    - name: Push changes
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-    - name: Build and push the docker image to ghcr.io
-      run: |
-        echo $CR_PAT | docker login ghcr.io -u yasuyuky --password-stdin
-        docker build . -t ghcr.io/yasuyuky/rust-arm:latest -t ghcr.io/yasuyuky/rust-arm:$TAGNAME
-        docker push -a ghcr.io/yasuyuky/rust-arm
-      env:
-        CR_PAT: ${{ secrets.CR_PAT }}
-        TAGNAME:  ${{ steps.tagging.outputs.tag }}
+      - uses: actions/checkout@master
+      - name: Commit files
+        id: tagging
+        run: |
+          git config --local user.email "yasuyuki.ymd@gmail.com"
+          git config --local user.name "Yasuyuki YAMADA"
+          TAGNAME=$(grep FROM Dockerfile|cut -f 2 -d ':'|cut -f 1 -d '-')
+          git tag -f -a ${TAGNAME} -m "${TAGNAME} Tagged by CI"
+          echo ::set-output name=tag::${TAGNAME}
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Log in to the Container registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:latest
+            ${{ env.REGISTRY }}/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:${{ steps.tagging.outputs.tag }}
