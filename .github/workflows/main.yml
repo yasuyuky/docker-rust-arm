@@ -24,7 +24,7 @@ jobs:
           git config --local user.name "Yasuyuki YAMADA"
           TAGNAME=$(grep FROM Dockerfile|cut -f 2 -d ':'|cut -f 1 -d '-')
           git tag -f -a ${TAGNAME} -m "${TAGNAME} Tagged by CI"
-          echo ::set-output name=tag::${TAGNAME}
+          echo tag=${TAGNAME} >>$GITHUB_OUTPUT
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
