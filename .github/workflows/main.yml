@@ -16,7 +16,7 @@ jobs:
       contents: write
       packages: write
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v4
       - name: Commit files
         id: tagging
         run: |
