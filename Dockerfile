@@ -1,4 +1,4 @@
-FROM rust:1.77.1-buster
+FROM rust:1.77.2-buster
 LABEL maintainer="yasuyuky <yasuyuki.ymd@gmail.com>"
 
 RUN apt-get -y update && apt-get -y install gcc-arm-linux-gnueabihf
