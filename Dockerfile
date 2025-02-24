@@ -1,4 +1,4 @@
-FROM rust:1.84.1-bullseye
+FROM rust:1.85.0-bullseye
 LABEL maintainer="yasuyuky <yasuyuki.ymd@gmail.com>"
 
 RUN apt-get -y update && apt-get -y install gcc-arm-linux-gnueabihf
