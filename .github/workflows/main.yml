@@ -26,7 +26,7 @@ jobs:
           git tag -f -a ${TAGNAME} -m "${TAGNAME} Tagged by CI"
           echo tag=${TAGNAME} >>$GITHUB_OUTPUT
       - name: Push changes
-        uses: ad-m/github-push-action@master
+        uses: ad-m/github-push-action@v1.0.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Log in to the Container registry
